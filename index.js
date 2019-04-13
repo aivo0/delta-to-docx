@@ -5,11 +5,22 @@ const testContent = require("./testContent");
 var app = express();
 
 app.get("/", function(req, res) {
-  const doc = new Document();
+  const author = req.query.author ? req.query.author : "";
+  const title = req.query.title ? req.query.title : "";
+  const doc = new Document({ creator: author, title });
+  let paragraph = "";
+  testContent.ops.forEach(op => {
+    if (op.insert && op.insert.speaker) {
+      doc.addParagraph(new Paragraph(op.insert.speaker + ":"));
+    } else if (op.insert && op.insert.includes("\n")) {
+      paragraph = paragraph + op.insert;
+      doc.addParagraph(new Paragraph(paragraph));
+      paragraph = "";
+    } else if (op.insert) {
+      paragraph = paragraph + op.insert;
+    }
+  });
 
-  const paragraph = new Paragraph("Hello World");
-
-  doc.addParagraph(paragraph);
   const packer = new Packer();
 
   packer.toBase64String(doc).then(b64string => {
@@ -22,3 +33,4 @@ app.get("/", function(req, res) {
 });
 
 app.listen(3333);
+console.log("Listening on: localhost:3333");
