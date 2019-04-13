@@ -1,0 +1,29 @@
+{
+  "name": "delta-to-docx",
+  "version": "1.0.0",
+  "description": "Generate .docx files from the Quill Delta format",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aivo0/delta-to-docx.git"
+  },
+  "keywords": [
+    "quill",
+    "delta",
+    "node",
+    "docx"
+  ],
+  "author": "Aivo Olev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aivo0/delta-to-docx/issues"
+  },
+  "homepage": "https://github.com/aivo0/delta-to-docx#readme",
+  "dependencies": {
+    "docx": "^4.7.1",
+    "express": "^4.16.4"
+  }
+}
